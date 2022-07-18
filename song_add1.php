@@ -11,39 +11,28 @@ if(!$con){
   echo "failed";
 }
 session_start();
-
+echo $_SESSION['user_id'];
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $artist_name=$_POST['artist_name'];
   $artist_dob=$_POST['artist_dob'];
   $artist_bio=$_POST['artist_bio'];
   $user_id=$_SESSION['user_id'];
-  $songname = $_POST["songname"];
-  $date = $_POST["date"];
-  $imgurl = $_POST["imgurl"];
-// if($_SERVER['REQUEST_METHOD'] == 'POST'){
-//  if(isset($_POST['artist_name'])){ $artist_name=$_POST['artist_name'];
-//   $artist_dob=$_POST['artist_dob'];
-//   $artist_bio=$_POST['artist_bio'];
-// $sql0="INSERT INTO `song_artist` (`artist_name`, `DOB`, `Bio`) VALUES ('$artist_name', '$artist_dob', '$artist_bio');";
-// $resutlt0=mysql_query($con,$sql0);
-// $_POST['artist_name']=NULL;
-//
-// }
-//   $user_id=$_SESSION[‘user_id’];
-//
-//   $songname = $_POST[“songname”];
-//
-//
-//   $date = $_POST["date"];
-//   $imgurl = $_POST["imgurl"];
 //INSERTION OF DATA
+   if(!empty($_POST['artist_name']))
+   {
   $sql0="INSERT INTO `song_artist` (`artist_name`, `DOB`, `Bio`) VALUES ('$artist_name', '$artist_dob', '$artist_bio');";
   $result0=mysqli_query($con,$sql0);
+  header("location:song_add1.php");
+   }
+   if(!empty($_POST['songname']))
+   {
+    $songname = $_POST["songname"];
+    $date = $_POST["date"];
+    $imgurl = $_POST["imgurl"];
   $sql = "INSERT INTO `songs` (`user_id`,`songname`,`date`,`imgurl`) VALUES ('$user_id','$songname','$date', '$imgurl')";
   $result = mysqli_query($con, $sql);
-
-  $sql2="SELECT * from `songs` ORDER BY `songs_id` DESC LIMIT 1;";
+   $sql2="SELECT * from `songs` ORDER BY `songs_id` DESC LIMIT 1;";
    $result2=mysqli_query($con, $sql2);
    $row=mysqli_fetch_assoc($result2);
    $songs_id=$row['songs_id'];
@@ -52,6 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $sql1 = "INSERT INTO `artist` (`artist_name`, `user_id`,`songs_id`) VALUES ('$val', '$user_id','$songs_id')";
     $result1 = mysqli_query($con, $sql1);
       }//foreach closed
+
   if($result){
   $insert = true;
    header("Location:song_add1.php");
@@ -62,6 +52,7 @@ else{
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div><br>';
 }
+   }
 }
 // header("location:song_add.php");
 ?>
@@ -134,6 +125,10 @@ else{
 
               <button type="submit" onclick="alert('Artist Added')" class="btn btn-primary">Update</button>
             </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
