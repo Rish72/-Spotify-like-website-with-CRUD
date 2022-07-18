@@ -21,7 +21,9 @@ In this Website User has to visit the login page first if the User has a Account
 
 **Artist Addition**
 
-![image](https://user-images.githubusercontent.com/94833042/179474387-ba36ab9d-3e06-4955-b7ed-ed1dabd390ba.png)
+![image](https://user-images.githubusercontent.com/94833042/179475189-f7fe30b4-7815-4d9d-942c-f6722c03ac7b.png)
+![image](https://user-images.githubusercontent.com/94833042/179475115-82cec216-b4bc-4fb5-9f85-41cb13d13126.png)
+
 
 
 
